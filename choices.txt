@@ -1,0 +1,10 @@
+I made a number of assumptions/choices. I just wanted to talk about them here:
+
+- Aggregating stats while sessionizing. 
+I decided to do the stat calculations after sessionizing. While this would be a bit slower if we only needed some info (since it has to sort each session by timestamp), it seeemed to make sense if we would usually need all 4 of the calculations at once. It could have been sped up a bit by keeping track of the first/last timestamp in a session to determine the duration, which would mean not needing the sort of the events. 
+
+- Average session time
+I included 0 second times in duration. I think it might be more useful to know how many 0 second durations there were, and have the average be only when there is more than 1 click. 
+
+- Find the most engaged user
+This could be calculated in a lot of different ways. I felt given the average session time already calculated, it made sense to just find the people with the longest average sesion time. I also thought about adding all the durations up for a user, which probably would have been a more informative stat. Finally I considered just finding the users who has the longest individual sessions. If I redid this, I probably would calculate the total session time and not the average duration. If someone has a 2 hour session, then logs in and out a few times and averages down to half an hour sessions because of it - I feel that would be lost information - and it would be more information to say they had 2 hours 1 minute of engagement. 
